@@ -1,0 +1,47 @@
+add_newline = true
+
+# Format des Prompts – definiert die Reihenfolge
+format = """
+$directory\
+$git_branch\
+$git_status\
+$cpp\
+$cmd_duration\
+$line_break\
+$character
+"""
+
+# Aktuelles Verzeichnis
+[directory]
+style = "blue"
+read_only = " 󰌾"
+read_only_style = "red"
+format = "[$path]($style)[$read_only]($read_only_style) "
+
+# Git-Zweig
+[git_branch]
+symbol = " "
+style = "purple"
+
+# Git-Status (Änderungen, Staging etc.)
+[git_status]
+style = "red"
+format = '([\[$all_status$ahead_behind\]]($style) )'
+
+[c]
+detect_extensions = ["c", "h", "cc", "cpp", "hh", "hpp"]
+symbol = " "
+style = "cyan"
+
+# Dauer der letzten Kommandoausführung
+[cmd_duration]
+format = "⏱ [$duration](yellow) "
+
+# Prompt-Symbol
+[character]
+success_symbol = "[➜](green)"
+error_symbol = "[✗](red)"
+vimcmd_symbol = "[](yellow)"
+
+[lua]
+format = 'via [🌕 $version](bold blue) '

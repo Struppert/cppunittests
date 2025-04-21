@@ -1,0 +1,16 @@
+CompileFlags:
+  CompilationDatabase: compile_commands.json
+
+InlayHints:
+  Enabled: true
+
+Diagnostics:
+  ClangTidy:
+    Add: [performance*, readability*]
+  SuppressAll: false
+
+Completion:
+  AllScopes: true
+
+Hover:
+  ShowAKA: true

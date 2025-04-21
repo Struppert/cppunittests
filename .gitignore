@@ -1,0 +1,8 @@
+# Build Verzeichnis
+build/
+
+# .gitignore
+devcontainer.sh
+
+# Neovim Cache
+.cache/
