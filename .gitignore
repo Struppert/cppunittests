@@ -2,7 +2,7 @@
 build/
 
 # .gitignore
-devcontainer.sh
+# devcontainer.sh
 
 # Neovim Cache
 .cache/
