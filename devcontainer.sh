@@ -42,10 +42,20 @@ else
 	echo "ℹ️  Kein Wayland-Socket gefunden – Clipboard im Container deaktiviert"
 fi
 
+# Gitconfig- und SSH-Mounts vorbereiten
+GITCONFIG_MOUNT="-v $HOME/.gitconfig:/home/vscode/.gitconfig:ro"
+SSH_MOUNT=""
+if [ -d "$HOME/.ssh" ]; then
+	echo "🔐 SSH-Verzeichnis erkannt – wird gemountet"
+	SSH_MOUNT="-v $HOME/.ssh:/home/vscode/.ssh:ro"
+else
+	echo "ℹ️  Kein SSH-Verzeichnis gefunden – SSH-Zugriff im Container ggf. nicht möglich"
+fi
+
 echo "🚀 Starte Container '$CONTAINER_NAME' mit systemd (explizit aktiviert)..."
 podman run -it --rm \
 	--privileged \
-	--name cppdev \
+	--name "$CONTAINER_NAME" \
 	--userns=keep-id \
 	--cap-add=SYS_ADMIN \
 	--security-opt=label=disable \
@@ -55,12 +65,15 @@ podman run -it --rm \
 	-v /sys/fs/cgroup:/sys/fs/cgroup:rw \
 	-v "$PWD":/workspace \
 	-v "$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY:/tmp/$WAYLAND_DISPLAY:ro" \
+	$WAYLAND_MOUNTS \
+	$GITCONFIG_MOUNT \
+	$SSH_MOUNT \
 	-w /workspace \
 	-p 2222:22 \
 	-e container=podman \
 	-e WAYLAND_DISPLAY=$WAYLAND_DISPLAY \
 	-e XDG_RUNTIME_DIR=/tmp \
-	--hostname cppdev \
+	--hostname "$CONTAINER_NAME" \
 	--systemd=always \
-	cppdev \
+	"$IMAGE_NAME" \
 	/lib/systemd/systemd
