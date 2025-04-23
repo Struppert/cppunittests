@@ -64,7 +64,7 @@ podman run -it --rm \
 	--tmpfs /run/lock \
 	-v /sys/fs/cgroup:/sys/fs/cgroup:rw \
 	-v "$PWD":/workspace \
-	-v "$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY:/tmp/$WAYLAND_DISPLAY:ro" \
+	-v "$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY:/tmp/xdg/$WAYLAND_DISPLAY:ro" \
 	$WAYLAND_MOUNTS \
 	$GITCONFIG_MOUNT \
 	$SSH_MOUNT \
