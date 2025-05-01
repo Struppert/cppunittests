@@ -34,23 +34,13 @@ RUN sudo sed -i '1i Server = https://mirror.netcologne.de/archlinux/$repo/os/$ar
 RUN paru -Syu --noconfirm --skipreview \
   clang gcc ccache gperftools luarocks nodejs python rust boost \
   cmake conan vcpkg ninja gdb valgrind rust-analyzer-git \
-  python-pip npm fish \
+  python-pip npm fish github-cli github-copilot-cli \
   ast-grep bat btop exa fd fzf lazygit ripgrep starship tokei unzip viu wget xclip xsel wl-clipboard zoxide \
   bash-completion fish zellij \
-  ttf-cascadia-code-nerd ttf-jetbrains-mono-nerd \
+  ttf-cascadia-code-nerd ttf-jetbrains-mono-nerd zig-nightly-bin \
   neovim-nightly \
-  chafa imagemagick ueberzugpp yazi || \
-  paru -Syu --noconfirm --skipreview \
-  clang gcc ccache gperftools luarocks nodejs python rust \
-  cmake conan vcpkg ninja gdb valgrind rust-analyzer-git \
-  python-pip npm \
-  ast-grep bat btop exa fd fzf lazygit ripgrep starship tokei unzip viu wget xclip xsel wl-clipboard zoxide \
-  bash-completion fish zellij \
-  ttf-cascadia-code-nerd ttf-jetbrains-mono-nerd \
-  neovim-nightly \
-  chafa imagemagick ueberzugpp yazi && \
+  chafa imagemagick ueberzugpp yazi \
   rm -rf ~/.cache/paru
-
 
 # 📦 Python-Tools (per pip)
 RUN pip install --break-system-packages --no-cache-dir \
@@ -75,7 +65,7 @@ RUN rm -f /etc/ssh/ssh_host_* && ssh-keygen -A && \
 # 🧠 Benutzer zurück für Config-Zeug
 USER vscode
 WORKDIR /workspace
-RUN git clone --branch devcontainer https://${GITHUB_TOKEN}@github.com/Struppert/nvim ~/.config/nvim
+RUN git clone --branch devcontainer https://github.com/Struppert/nvim ~/.config/nvim
 
 # dieser Block versucht die Plugins zur containerzeit zu installieren. Es scheitert aber wegen den Rueckfragen von 
 # Codeium und Copilot; hier wird dann eine Bedingung zum verzweigen benoetigt.
