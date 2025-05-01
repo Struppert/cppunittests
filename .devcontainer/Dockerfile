@@ -39,7 +39,7 @@ RUN paru -Syu --noconfirm --skipreview \
   bash-completion fish zellij \
   ttf-cascadia-code-nerd ttf-jetbrains-mono-nerd zig-nightly-bin \
   neovim-nightly \
-  chafa imagemagick ueberzugpp yazi \
+  chafa imagemagick ueberzugpp yazi && \
   rm -rf ~/.cache/paru
 
 # 📦 Python-Tools (per pip)
