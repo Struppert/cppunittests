@@ -82,6 +82,14 @@ COPY --chown=vscode:vscode .devcontainer/starship.toml /home/vscode/.config/star
 # Fish-Konfiguration kopieren
 COPY --chown=vscode:vscode .devcontainer/config.fish /home/vscode/.config/fish/config.fish
 
+# zellij anlegen
+USER vscode
+RUN mkdir -p /home/vscode/.config/zellij
+# zellij kopieren
+USER root
+COPY --chown=vscode:vscode .devcontainer/config.kdl /home/vscode/.config/zellij/config.kdl
+
+
 # 🛠 Shell-Init + Aliase
 RUN mkdir -p /home/vscode/.config && \
   echo 'eval "$(starship init bash)"' >> /home/vscode/.bashrc && \

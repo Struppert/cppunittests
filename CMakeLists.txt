@@ -36,11 +36,29 @@ if(NOT "${CMAKE_BINARY_DIR}" STREQUAL "${CMAKE_SOURCE_DIR}")
 endif()
 
 include(FetchContent)
+
+# faker-cxx holen
+# FetchContent_Declare(
+#   faker-cxx
+#   GIT_REPOSITORY https://github.com/cieslarmichal/faker-cxx.git
+#   GIT_TAG main
+# )
+
+# # trompeloeil holen
+# fetchcontent_declare(
+#   trompeloeil
+#   git_repository https://github.com/rollbear/trompeloeil.git
+#   git_tag master
+# )
+
 FetchContent_Declare(
   catch2
   GIT_REPOSITORY https://github.com/catchorg/Catch2.git
   GIT_TAG v3.5.4 # oder aktuelle Version
 )
+
+#FetchContent_MakeAvailable(faker-cxx trompeloeil catch2)
+#FetchContent_MakeAvailable(faker-cxx catch2)
 FetchContent_MakeAvailable(catch2)
 
 add_executable(tests tests/tests.cpp)

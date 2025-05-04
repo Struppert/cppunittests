@@ -1,0 +1,62 @@
+
+// ~/.config/zellij/config.kdl
+
+// Farbschema: Kanagawa Dragon
+themes {
+  kanagawa_dragon {
+    fg "#c5c9c5"
+    bg "#181616"
+    black "#0d0c0c"
+    red "#c4746e"
+    green "#8a9a7b"
+    yellow "#c4b28a"
+    blue "#8ba4b0"
+    magenta "#a292a3"
+    cyan "#8ea4a2"
+    white "#C8C093"
+    orange "#b6927b"
+  }
+}
+
+theme "kanagawa_dragon"
+
+// ─────────────────────── Plugins ───────────────────────
+plugins {
+  autolock {
+    location "file:~/.config/zellij/plugins/zellij-autolock.wasm"
+  }
+  choose-tree {
+    location "file:~/.config/zellij/plugins/zellij-choose-tree.wasm"
+  }
+  datetime {
+    location "file:~/.config/zellij/plugins/zellij-datetime.wasm"
+  }
+  forgot {
+    location "file:~/.config/zellij/plugins/zellij-forgot.wasm"
+  }
+}
+
+// ───────────── Keybindings konfigurieren ─────────────
+keybinds {
+  locked {
+    // Ctrl+g zum Entsperren (Switch zu Normal Mode)
+    bind "Ctrl g" { SwitchToMode "Normal"; }
+  }
+
+  // Kommandomodus für Zellij
+  normal {
+    // Beispiel für praktische Keybindings im Normal-Modus
+    bind "Ctrl g" { SwitchToMode "Locked"; } // optional, um wieder zu sperren
+    bind "Ctrl p" { SwitchToMode "Pane"; }
+    //bind "Ctrl t" { NewTab; }
+    //bind "Ctrl q" { ClosePane; }
+  }
+}
+
+// ──────────────────── Allgemeine Optionen ────────────────────
+options {
+  simplified_ui true
+  pane_frames false
+  default_mode "locked"   // Zellij startet im Passthrough‑Modus
+}
+

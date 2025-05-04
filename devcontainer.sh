@@ -37,7 +37,7 @@ echo "🖼️  Prüfe Wayland..."
 WAYLAND_MOUNTS=""
 if [[ -n "$WAYLAND_DISPLAY" && -n "$XDG_RUNTIME_DIR" && -S "$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY" ]]; then
 	echo "✅ Wayland-Clipboard aktiv – $WAYLAND_DISPLAY"
-	WAYLAND_MOUNTS="-e WAYLAND_DISPLAY=$WAYLAND_DISPLAY -e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR -v $XDG_RUNTIME_DIR:$XDG_RUNTIME_DIR"
+	WAYLAND_MOUNTS="-e WAYLAND_DISPLAY=$WAYLAND_DISPLAY -e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR -v $XDG_RUNTIME_DIR/$WAYLAND_DISPLAY:$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY:ro"
 else
 	echo "ℹ️  Kein Wayland-Socket gefunden – Clipboard im Container deaktiviert"
 fi
@@ -64,7 +64,6 @@ podman run -it --rm \
 	--tmpfs /run/lock \
 	-v /sys/fs/cgroup:/sys/fs/cgroup:rw \
 	-v "$PWD":/workspace \
-	-v "$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY:/tmp/xdg/$WAYLAND_DISPLAY:ro" \
 	$WAYLAND_MOUNTS \
 	$GITCONFIG_MOUNT \
 	$SSH_MOUNT \
