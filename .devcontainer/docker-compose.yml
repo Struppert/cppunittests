@@ -1,0 +1,52 @@
+
+version: "3.9"
+
+services:
+  cppdev:
+    container_name: cppdev            # entspricht $CONTAINER_NAME
+    build:
+      context: .                      # Projektwurzel
+      dockerfile: .devcontainer/Dockerfile
+      args:                           # entspricht den --build-arg-Flags
+        HOST_UID: ${HOST_UID:-1000}
+        HOST_GID: ${HOST_GID:-1000}
+        GITHUB_TOKEN: ${GITHUB_TOKEN:-}
+    image: cppdev                     # entspricht $IMAGE_NAME
+    privileged: true                  # --privileged
+    # Podmans »--userns=keep-id« gibt es so nicht in Docker.
+    # Option A: root inside Container, aber mit User-Namespace des Hosts
+    userns_mode: "host"
+    # Option B (falls User-Namespaces nicht aktiviert sind):
+    #  user: "${HOST_UID}:${HOST_GID}"
+
+    hostname: cppdev
+    working_dir: /workspace           # -w
+    command: /lib/systemd/systemd     # --systemd=always
+    ports:
+      - "2222:22"                     # -p
+    environment:
+      # Das Flag »container=podman« stammt nur aus Gewohnheit –
+      # kann bei Bedarf entfernt werden.
+      - container=podman
+      - WAYLAND_DISPLAY=${WAYLAND_DISPLAY:-}
+      # Im Skript überschreibst du XDG_RUNTIME_DIR im Container bewusst mit /tmp
+      - XDG_RUNTIME_DIR=/tmp
+    tmpfs:                            # --tmpfs …
+      - /tmp
+      - /run
+      - /run/lock
+    volumes:
+      # Projektverzeichnis
+      - .:/workspace
+      # CGroup-Dateisystem für systemd-Support
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+      # Wayland-Socket – nur wenn die Variablen existieren.
+      # Kommentar entfernen, falls du wirklich Wayland nutzt.
+      # - ${XDG_RUNTIME_DIR}/${WAYLAND_DISPLAY}:${XDG_RUNTIME_DIR}/${WAYLAND_DISPLAY}:ro
+      # Git-Config
+      - ${HOME}/.gitconfig:/home/vscode/.gitconfig:ro
+      # SSH-Schlüssel (falls vorhanden)
+      - ${HOME}/.ssh:/home/vscode/.ssh:ro
+    # Bei Compose v2 kannst du alternativ auch
+    # init: true
+    # benutzen, wenn dir ein minimales Init-System reicht.
