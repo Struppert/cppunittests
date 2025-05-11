@@ -14,16 +14,16 @@ set -gx GITHUB_TOKEN asdfghjk
 # 📝 Editor
 set -gx EDITOR nvim
 
-# 📁 exa-Aliase (wenn verfügbar)
-if type -q exa
-    abbr -a ls exa
-    abbr -a ll 'exa -lh --icons'
-    abbr -a la 'exa -lha --icons'
-    abbr -a lt 'exa -T --icons'
-    abbr -a lsd 'exa -lh --sort=modified --icons'
-    abbr -a ldirs 'exa -lh --group-directories-first --icons | grep "^d"'
-    abbr -a llong 'exa -l --git --group-directories-first --icons'
-    abbr -a ltree 'exa -T -L 2 --icons'
+# 📁 eza-Aliase (wenn verfügbar)
+if type -q eza
+    abbr -a ls eza
+    abbr -a ll 'eza -lh --icons'
+    abbr -a la 'eza -lha --icons'
+    abbr -a lt 'eza -T --icons'
+    abbr -a lsd 'eza -lh --sort=modified --icons'
+    abbr -a ldirs 'eza -lh --group-directories-first --icons | grep "^d"'
+    abbr -a llong 'eza -l --git --group-directories-first --icons'
+    abbr -a ltree 'eza -T -L 2 --icons'
 else
     abbr -a ls 'ls --color=auto'
     abbr -a ll 'ls -lhA'

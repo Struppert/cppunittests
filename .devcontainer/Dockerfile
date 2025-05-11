@@ -35,7 +35,7 @@ RUN paru -Syu --noconfirm --skipreview \
   clang gcc ccache gperftools luarocks nodejs python rust boost \
   cmake conan vcpkg ninja gdb valgrind rust-analyzer-git \
   python-pip npm fish github-cli github-copilot-cli \
-  ast-grep bat btop exa fd fzf lazygit ripgrep starship tokei unzip viu wget xclip xsel wl-clipboard zoxide \
+  ast-grep bat btop eza fd fzf lazygit ripgrep starship tokei unzip viu wget xclip xsel wl-clipboard zoxide \
   bash-completion fish zellij \
   ttf-cascadia-code-nerd ttf-jetbrains-mono-nerd zig-nightly-bin \
   neovim-nightly \
@@ -97,15 +97,15 @@ RUN mkdir -p /home/vscode/.config && \
   echo 'eval "$(zoxide init bash)"' >> /home/vscode/.bashrc && \
   echo 'export WAYLAND_DISPLAY=/run/wayland-0' >> /home/vscode/.bashrc && \
   echo '' >> /home/vscode/.bashrc && \
-  echo '# exa aliases' >> /home/vscode/.bashrc && \
-  echo 'alias ls="exa"' >> /home/vscode/.bashrc && \
-  echo 'alias ll="exa -lh --icons"' >> /home/vscode/.bashrc && \
-  echo 'alias la="exa -lha --icons"' >> /home/vscode/.bashrc && \
-  echo 'alias lt="exa -T --icons"' >> /home/vscode/.bashrc && \
-  echo 'alias lsd="exa -lh --sort=modified --icons"' >> /home/vscode/.bashrc && \
-  echo 'alias ldirs="exa -lh --group-directories-first --icons | grep \"^d\""' >> /home/vscode/.bashrc && \
-  echo 'alias llong="exa -l --git --group-directories-first --icons"' >> /home/vscode/.bashrc && \
-  echo 'alias ltree="exa -T -L 2 --icons"' >> /home/vscode/.bashrc && \
+  echo '# eza aliases' >> /home/vscode/.bashrc && \
+  echo 'alias ls="eza"' >> /home/vscode/.bashrc && \
+  echo 'alias ll="eza -lh --icons"' >> /home/vscode/.bashrc && \
+  echo 'alias la="eza -lha --icons"' >> /home/vscode/.bashrc && \
+  echo 'alias lt="eza -T --icons"' >> /home/vscode/.bashrc && \
+  echo 'alias lsd="eza -lh --sort=modified --icons"' >> /home/vscode/.bashrc && \
+  echo 'alias ldirs="eza -lh --group-directories-first --icons | grep \"^d\""' >> /home/vscode/.bashrc && \
+  echo 'alias llong="eza -l --git --group-directories-first --icons"' >> /home/vscode/.bashrc && \
+  echo 'alias ltree="eza -T -L 2 --icons"' >> /home/vscode/.bashrc && \
   echo 'alias ..="cd .."' >> /home/vscode/.bashrc && \
   echo 'alias ...="cd ../.."' >> /home/vscode/.bashrc && \
   echo 'alias ....="cd ../../.."' >> /home/vscode/.bashrc && \
